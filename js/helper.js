@@ -1,6 +1,6 @@
 const api_key = '786b6a059112fdf5f03a9982d2b6e694';
 const loc = 'London,gb';
-const api = 'http://api.openweathermap.org/data/2.5/forecast';
+const api = 'https://cors-anywhere.herokuapp.com/http://api.openweathermap.org/data/2.5/forecast';
 const iconSrc = 'http://openweathermap.org/img/w/';
 const forecastSection = document.getElementById("forecast");
 
