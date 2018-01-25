@@ -22,6 +22,10 @@ const getDayToday = () => (
 	new Date().getDay()
 )
 
+const getCurrentHour = () => (
+	new Date().getHours()
+)
+
 const getWeekday = (day) => {
 	day = day > 6 ? day - 7 : day;
 
@@ -95,19 +99,28 @@ const emptyDom = () => {
 }
 
 window.onload = async function() {
+	const curhour = getCurrentHour();
 	const weatherData = await weatherInfo();
 
-	const dayOneData = weatherData.list.slice(0,5);
-	const dayTwoData = weatherData.list.slice(0,5);
-	const dayThreeData = weatherData.list.slice(0,5);
-	const dayFourData = weatherData.list.slice(0,5);
-	const dayFiveData = weatherData.list.slice(0,5);
+	const dayOneData = weatherData.list.slice(0,8);
+	const dayTwoData = weatherData.list.slice(8,16);
+	const dayThreeData = weatherData.list.slice(16,24);
+	const dayFourData = weatherData.list.slice(24,32);
+	const dayFiveData = weatherData.list.slice(32);
 
-	renderButtons('Today', dayOneData);
-	renderButtons('Tomorrow', dayTwoData);
-	renderButtons(getWeekday(getDayToday() + 2), dayThreeData);
-	renderButtons(getWeekday(getDayToday() + 3), dayFourData);
-	renderButtons(getWeekday(getDayToday() + 4), dayFiveData);
+	if(curhour >= 21){
+		renderButtons('Tomorrow', dayOneData);
+		renderButtons(getWeekday(getDayToday() + 2), dayTwoData);
+		renderButtons(getWeekday(getDayToday() + 3), dayThreeData);
+		renderButtons(getWeekday(getDayToday() + 4), dayFourData);
+		renderButtons(getWeekday(getDayToday() + 5), dayFiveData);
+	} else {
+		renderButtons('Today', dayOneData);
+		renderButtons('Tomorrow', dayTwoData);
+		renderButtons(getWeekday(getDayToday() + 2), dayThreeData);
+		renderButtons(getWeekday(getDayToday() + 3), dayFourData);
+		renderButtons(getWeekday(getDayToday() + 4), dayFiveData);
+ }
 
-  renderWeatherInfo(dayOneData);
+ renderWeatherInfo(dayOneData);
 }
